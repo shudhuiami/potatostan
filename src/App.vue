@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <h1>Potatostan</h1>
+    <AppTable/>
   </div>
 </template>
 
 <script>
 
+import AppTable from './components/AppTable';
+
 export default {
   name: 'App',
-  components: {}
+  components: {AppTable}
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import './assets/scss/main';
 </style>

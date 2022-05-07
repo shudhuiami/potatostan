@@ -1,0 +1,31 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-container-wrapper{
+  margin: 100px 10% 0 10%;
+  .section-header{
+    width: 100%;
+    margin-bottom: 15px;
+    display: inline-block;
+    .section-title{
+      float: left;
+    }
+    .section-actions{
+      float: right;
+    }
+  }
+}
+
+.btn{
+  cursor: pointer;
+  &.btn-theme{
+    border: 1px solid #FF8D00;
+    padding: 10px 20px;
+    background-color: #FF8D00;
+    color: #fff;
+    border-radius: 3px;
+  }
+}
