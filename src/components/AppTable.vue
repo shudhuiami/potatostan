@@ -3,27 +3,30 @@
     <div class="section-header">
       <div class="section-title">Sorting Training System</div>
       <div class="section-actions">
-        <button class="btn btn-theme">Start Sorting</button>
+        <button class="btn btn-theme" data-modal-trigger="SortStartModal">Start Sorting</button>
       </div>
     </div>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>Email</th>
-        <th>Potatoes</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-      </tr>
-      </thead>
-      <draggable v-model="peoples" tag="tbody">
-        <tr v-for="(people, index) in peoples" :key="(index+1)">
-          <td>{{ people.email }}</td>
-          <td><strong>{{ people.potatoes }}</strong></td>
-          <td>{{ people.first_name }}</td>
-          <td>{{ people.last_name }}</td>
+    <div class="main-container-inner">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>Email</th>
+          <th>Potatoes</th>
+          <th>First Name</th>
+          <th>Last Name</th>
         </tr>
-      </draggable>
-    </table>
+        </thead>
+        <draggable v-model="peoples" tag="tbody">
+          <tr v-for="(people, index) in peoples" :key="(index+1)">
+            <td>{{ people.email }}</td>
+            <td><strong>{{ people.potatoes }}</strong></td>
+            <td>{{ people.first_name }}</td>
+            <td>{{ people.last_name }}</td>
+          </tr>
+        </draggable>
+      </table>
+    </div>
+    <AppSortModal/>
   </div>
 </template>
 
@@ -31,6 +34,7 @@
 
 import draggable from 'vuedraggable';
 import {uniqueNamesGenerator, names} from 'unique-names-generator';
+import AppSortModal from './../components/StartSortModal'
 
 export default {
   name: 'AppTable',
@@ -62,12 +66,35 @@ export default {
         })
         count--;
       }
+    },
+    startSortModal() {
+      document.getElementById('SortStartModal').classList.toggle('open');
+    },
+    GlobalModalOpen() {
+      const triggers = Array.from(document.querySelectorAll('[data-modal-trigger]'))
+      while (triggers.length){
+        const item = triggers.pop();
+        const target = item.getAttribute('data-modal-trigger');
+        item.onclick = () => {document.getElementById(target).classList.toggle('open');};
+      }
+    },
+    GlobalModalClose() {
+      let triggers = Array.from(document.querySelectorAll('[data-toggle="modal-close"]'))
+      while (triggers.length){
+        let item = triggers.pop();
+        item.onclick = () => {item.closest('.modal').classList.toggle('open')};
+      }
     }
+
   },
   created() {
-    this.GeneratesPeoples()
+
   },
-  components: {draggable}
+  mounted() {
+    this.GlobalModalOpen()
+    this.GlobalModalClose()
+  },
+  components: {draggable, AppSortModal}
 }
 </script>
 
