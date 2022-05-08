@@ -11,13 +11,13 @@
         <div class="modal-body">
             <div class="form-group">
               <p>Enter a number of how many people you want to add to the list.</p>
-              <input type="text" class="form-control" placeholder="">
+              <input v-model="count" type="text" class="form-control" placeholder="Enter the number of people">
             </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-ash">Cancel</button>
+          <button data-toggle="modal-close" class="btn btn-ash">Cancel</button>
           &nbsp;
-          <button class="btn btn-theme">Start</button>
+          <button v-on:click="StartSort" class="btn btn-theme">Start</button>
         </div>
       </div>
     </div>
@@ -29,10 +29,15 @@
 export default {
   name: 'AppSortModal',
   data() {
-    return {}
+    return {
+      count: 0
+    }
   },
   methods: {
-
+    StartSort() {
+      this.$store.dispatch('generatesPeoples', this.count)
+      document.getElementById('SortStartModal').classList.toggle('open')
+    }
   },
   mounted(){
 

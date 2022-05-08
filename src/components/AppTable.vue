@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="main-container-inner">
-      <table class="table table-bordered">
+      <table class="table table-bordered" v-if="peoples.length > 0">
         <thead>
         <tr>
           <th>Email</th>
@@ -33,14 +33,12 @@
 <script>
 
 import draggable from 'vuedraggable';
-import {uniqueNamesGenerator, names} from 'unique-names-generator';
 import AppSortModal from './../components/StartSortModal'
 
 export default {
   name: 'AppTable',
   data() {
     return {
-      peoples: [],
       mailHosts: [
         'gmail.com',
         'yahoo.com',
@@ -49,27 +47,16 @@ export default {
       ],
     }
   },
+  computed: {
+    Hosts() {
+      return this.$store.getters.HostsList;
+    },
+    peoples() {
+      return this.$store.getters.getPeoples;
+    },
+
+  },
   methods: {
-    GeneratesPeoples() {
-      let count = 20;
-      while (count) {
-        const first_name = uniqueNamesGenerator({dictionaries: [names]});
-        const last_name = uniqueNamesGenerator({dictionaries: [names]});
-        const mailHost = uniqueNamesGenerator({dictionaries: [this.mailHosts]});
-        const user_email = first_name + '@' + mailHost;
-        const potatoes = Math.floor(Math.random() * 999) + 1;
-        this.peoples.push({
-          email: user_email,
-          potatoes: potatoes,
-          first_name: first_name,
-          last_name: last_name,
-        })
-        count--;
-      }
-    },
-    startSortModal() {
-      document.getElementById('SortStartModal').classList.toggle('open');
-    },
     GlobalModalOpen() {
       const triggers = Array.from(document.querySelectorAll('[data-modal-trigger]'))
       while (triggers.length){
