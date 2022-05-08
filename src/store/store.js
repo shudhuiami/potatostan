@@ -11,6 +11,9 @@ export const store = new Vuex.Store({
             'live.com',
             'outlook.com',
         ],
+        startSortModal: false,
+        timerSec: 0,
+        timerStatus: false,
     },
     getters: {
         HostsList(state) {
@@ -19,12 +22,36 @@ export const store = new Vuex.Store({
         getPeoples(state) {
             return state.peoples;
         },
+        getStartModal(state) {
+            return state.startSortModal;
+        },
+        getTimerSec(state) {
+            return state.timerSec;
+        },
+        getTimerStatus(state) {
+            return state.timerStatus;
+        },
+
+
+
 
     },
     mutations: {
         setPeoples(state, option) {
             state.peoples = option;
         },
+        setStartModal(state, option) {
+            state.startSortModal = option;
+        },
+        setTimerSec(state, option) {
+            state.timerSec = option;
+        },
+        setTimerStatus(state, option) {
+            state.timerStatus = option;
+        },
+
+
+
     },
     actions: {
         generatesPeoples(context, count) {
@@ -44,6 +71,13 @@ export const store = new Vuex.Store({
                 count--;
             }
             context.commit('setPeoples', peoples_arr)
+        },
+        SortCompleted(context, status)
+        {
+            if(status === true){
+                context.commit('setTimerStatus', false);
+                alert('Winner');
+            }
         },
     }
 });
