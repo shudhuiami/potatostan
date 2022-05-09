@@ -2,7 +2,9 @@
   <div id="app">
     <div class="main-container-wrapper">
       <div class="section-header">
-        <div class="section-title">Sorting Training System</div>
+        <div class="section-title">
+          <span class="gd-text">Sorting Training System</span>
+        </div>
         <div class="section-actions">
           <button class="btn btn-theme" v-on:click="startTraining">Start Sorting</button>
         </div>
@@ -15,7 +17,7 @@
         <AppTable/>
       </div>
       <div class="main-container-inner flex-inner" v-if="peoples.length === 0">
-        <h2>Peoples list is empty</h2>
+        <h2 class="gd-text-2">Peoples list is empty</h2>
       </div>
 
     </div>

@@ -8,8 +8,8 @@
       <th>Last Name</th>
     </tr>
     </thead>
-    <draggable v-model="peoples" tag="tbody" @end="GetSortStatus">
-      <tr v-for="(people, index) in peoples" :key="(index+1)">
+    <draggable :options="{disabled : timerStatus === false && peoples.length > 0}" v-model="peoples" tag="tbody" @end="GetSortStatus">
+      <tr class="unselectable" v-for="(people, index) in peoples" :key="(index+1)">
         <td>{{ people.email }}</td>
         <td><strong>{{ people.potatoes }}</strong></td>
         <td>{{ people.first_name }}</td>
@@ -26,9 +26,7 @@ import draggable from 'vuedraggable';
 export default {
   name: 'AppTable',
   data() {
-    return {
-      peoplesList: [],
-    }
+    return {}
   },
   computed: {
     peoples: {
@@ -39,6 +37,9 @@ export default {
         this.$store.commit('setPeoples', value)
       }
     },
+    timerStatus() {
+      return this.$store.getters.getTimerStatus;
+    }
   },
   methods: {
     CheckListSort(arr, n) {

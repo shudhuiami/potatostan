@@ -1,5 +1,5 @@
 <template>
-  <span v-text="timer"></span>
+  <span v-text="formatTime(timerCount)"></span>
 </template>
 
 <script>
@@ -71,8 +71,18 @@ export default {
       this.timer = '00:00';
       this.timerCount = 0;
       this.timerInterval = setInterval(() => {
-        this.timer = this.pad(parseInt(this.timerCount/60,10))+':'+this.pad(++this.timerCount%60)
+        ++this.timerCount
       },1000)
+    },
+    formatTime(totalSeconds) {
+      let hours = Math.floor(totalSeconds / 3600);
+      totalSeconds %= 3600;
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+      minutes = String(minutes).padStart(2, "0");
+      hours = String(hours).padStart(2, "0");
+      seconds = String(seconds).padStart(2, "0");
+      return hours + " : " + minutes + " : " + seconds;
     }
   },
   mounted() {},

@@ -7,7 +7,7 @@
       <form @submit.prevent="StartSort">
         <div class="form-group">
           <p>Enter a number of how many people you want to add to the list.</p>
-          <input @keyup="valueValidate" v-model="count" type="text" class="form-control" placeholder="Enter the number of people">
+          <input @keypress="isNumber($event)" @keyup="valueValidate" v-model="count" type="text" class="form-control" placeholder="Enter the number of people">
           <small class="helper-text text-danger" v-if="countValidation">Value is required and should be between 20 and 100</small>
         </div>
       </form>
@@ -54,9 +54,17 @@ export default {
       }
     },
     valueValidate() {
-      const pattern=/^[2-9][0-9]?$|^100$/
-      this.countValidation = !pattern.test(this.count);!pattern.test(this.count)
+      this.countValidation = !(this.count >= 20 && this.count <= 100);
     },
+    isNumber: function(evt) {
+      evt = (evt) ? evt : window.event;
+      let charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    }
   },
   mounted(){
   },
