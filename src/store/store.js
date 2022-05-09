@@ -12,8 +12,14 @@ export const store = new Vuex.Store({
             'outlook.com',
         ],
         startSortModal: false,
+        resultModal: false,
+        alertModal: false,
         timerSec: 0,
         timerStatus: false,
+        timerStart: false,
+        timerStop: false,
+        timerReset: false,
+        timerInterval: null
     },
     getters: {
         HostsList(state) {
@@ -22,14 +28,35 @@ export const store = new Vuex.Store({
         getPeoples(state) {
             return state.peoples;
         },
+        getPeoplesLength(state) {
+            return state.peoples.length;
+        },
         getStartModal(state) {
             return state.startSortModal;
+        },
+        getResultModal(state) {
+            return state.resultModal;
+        },
+        getAlertModal(state) {
+            return state.alertModal;
         },
         getTimerSec(state) {
             return state.timerSec;
         },
         getTimerStatus(state) {
             return state.timerStatus;
+        },
+        getTimerStart(state) {
+            return state.timerStart;
+        },
+        getTimerStop(state) {
+            return state.timerStop;
+        },
+        getTimerReset(state) {
+            return state.timerReset;
+        },
+        getTimerInterval(state) {
+            return state.timerInterval;
         },
 
 
@@ -43,14 +70,30 @@ export const store = new Vuex.Store({
         setStartModal(state, option) {
             state.startSortModal = option;
         },
+        setResultModal(state, option) {
+            state.resultModal = option;
+        },
+        setAlertModal(state, option) {
+            state.alertModal = option;
+        },
         setTimerSec(state, option) {
             state.timerSec = option;
         },
         setTimerStatus(state, option) {
             state.timerStatus = option;
         },
-
-
+        setTimerStart(state, option) {
+            state.timerStart = option;
+        },
+        setTimerStop(state, option) {
+            state.timerStop = option;
+        },
+        setTimerReset(state, option) {
+            state.timerReset = option;
+        },
+        setTimerInterval(state, option) {
+            state.timerInterval = option;
+        },
 
     },
     actions: {
@@ -72,11 +115,10 @@ export const store = new Vuex.Store({
             }
             context.commit('setPeoples', peoples_arr)
         },
-        SortCompleted(context, status)
-        {
+        SortCompleted(context, status) {
             if(status === true){
-                context.commit('setTimerStatus', false);
-                alert('Winner');
+                context.commit('setTimerStop', true);
+                context.commit('setResultModal', true);
             }
         },
     }

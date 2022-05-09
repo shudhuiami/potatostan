@@ -4,7 +4,7 @@
       <div class="section-header">
         <div class="section-title">Sorting Training System</div>
         <div class="section-actions">
-          <button class="btn btn-theme" v-on:click="$store.commit('setStartModal', true)">Start Sorting</button>
+          <button class="btn btn-theme" v-on:click="startTraining">Start Sorting</button>
         </div>
         <div class="timer-wrapper">
           <AppTimer/>
@@ -20,13 +20,17 @@
 
     </div>
     <AppSortModal/>
+    <AppResultModal/>
+    <AppAlertModal/>
   </div>
 </template>
 
 <script>
 
 import AppTable from './components/AppTable';
-import AppSortModal from './components/StartSortModal'
+import AppSortModal from './components/modals/StartSortModal'
+import AppResultModal from './components/modals/ResultModal'
+import AppAlertModal from './components/modals/AlertModal'
 import AppTimer from './components/Timer'
 
 export default {
@@ -39,13 +43,24 @@ export default {
     peoples() {
       return this.$store.getters.getPeoples;
     },
+    timerStatus() {
+      return this.$store.getters.getTimerStatus;
+    },
+
 
   },
   methods: {
+    startTraining() {
+      if(this.timerStatus === false){
+        this.$store.commit('setStartModal', true)
+      }else{
+        this.$store.commit('setAlertModal', true)
+      }
+    }
   },
   mounted() {
   },
-  components: {AppTable, AppSortModal, AppTimer}
+  components: {AppTable, AppSortModal, AppResultModal, AppAlertModal, AppTimer}
 }
 </script>
 

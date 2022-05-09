@@ -15,25 +15,49 @@ export default {
     };
   },
   computed: {
-    getTimerStatus() {
-      return this.$store.getters.getTimerStatus;
+    getTimerStart() {
+      return this.$store.getters.getTimerStart;
     },
+    getTimerStop() {
+      return this.$store.getters.getTimerStop;
+    },
+    getTimerReset() {
+      return this.$store.getters.getTimerReset;
+    },
+
   },
   watch: {
-    getTimerStatus(newValue) {
+    getTimerStart(newValue) {
         if(newValue === true){
           this.initTimer();
-        }else{
+          this.$store.commit('setTimerStatus', true)
+          this.$store.commit('setTimerStart', false)
+        }
+    },
+    getTimerStop(newValue) {
+        if(newValue === true){
+          if(this.timerInterval !== null){
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+          }
+          this.$store.commit('setTimerStatus', false)
+          this.$store.commit('setTimerStop', false)
+        }
+    },
+    getTimerReset(newValue) {
+      if(newValue === true){
+        if(this.timerInterval !== null){
           clearInterval(this.timerInterval);
           this.timerInterval = null;
-          this.timer = '00:00';
-          this.timerCount = 0;
         }
+        this.timerCount = 0;
+        this.timer = '00:00';
+        this.$store.commit('setTimerSec', 0)
+      }
     },
     timerCount(newValue) {
       this.$store.commit('setTimerSec', newValue)
-    }
-
+    },
   },
   methods: {
     pad(val) {

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import ModalComponent from './global/Modal.vue';
+import ModalComponent from '../global/Modal.vue';
 
 export default {
   name: 'AppSortModal',
@@ -49,7 +49,7 @@ export default {
       this.valueValidate();
       if(this.countValidation === false){
         this.$store.dispatch('generatesPeoples', this.count)
-        this.$store.commit('setTimerStatus', true)
+        this.$store.commit('setTimerStart', true)
         this.closeModal()
       }
     },
