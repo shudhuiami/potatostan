@@ -110,6 +110,7 @@ export const store = new Vuex.Store({
                     potatoes: potatoes,
                     first_name: first_name,
                     last_name: last_name,
+                    active: false,
                 })
                 count--;
             }

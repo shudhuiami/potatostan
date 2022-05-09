@@ -1,3 +1,4 @@
+
 .table {
   width: 100%;
   margin-bottom: 1rem;
@@ -5,12 +6,52 @@
   border-collapse: collapse;
 }
 
+.table th{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #555555!important;
+}
+.table tr{
+  &.active{
+    td{
+      transition: all .2s ease;
+      background: #F5F5F5;
+    }
+  }
+}
+.table td{
+  font-family: 'Roboto',sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000!important;
+  transition: all .2s ease;
+  .email-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+}
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding:14.5px 25px!important;
   vertical-align: top;
-  border-top: 1px solid #dee2e6;
+  border-radius: 0!important;
+  border: 0!important;
+  border-top: 1px solid #dee2e6!important;
   cursor: pointer;
+  border-right:none!important;
+  border-left:none!important;
+  text-align: left;
+  &:first-child{
+    width: 300px!important;
+    border-right:1px solid #DDDDDD!important;
+  }
 }
 
 .sortable-chosen{
@@ -20,11 +61,11 @@
 .table thead th {
   text-align: left;
   vertical-align: center;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom:1px solid #DDDDDD;
 }
 
 .table tbody + tbody {
-  border-top: 2px solid #dee2e6;
+  border-top: 1px solid #DDDDDD;
 }
 
 .table-sm th,
@@ -33,17 +74,17 @@
 }
 
 .table-bordered {
-  border: 1px solid #dee2e6;
+  border: 1px solid #DDDDDD;
 }
 
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #dee2e6;
+  border: 1px solid #DDDDDD;
 }
 
 .table-bordered thead th,
 .table-bordered thead td {
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
 }
 
 

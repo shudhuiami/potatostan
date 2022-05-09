@@ -9,9 +9,24 @@
     </tr>
     </thead>
     <draggable :options="{disabled : timerStatus === false && peoples.length > 0}" v-model="peoples" tag="tbody" @end="GetSortStatus">
-      <tr class="unselectable" v-for="(people, index) in peoples" :key="(index+1)">
-        <td>{{ people.email }}</td>
-        <td><strong>{{ people.potatoes }}</strong></td>
+      <tr class="unselectable" v-for="(people, index) in peoples" :key="(index+1)"  :class="{'active':people.active === true}">
+        <td>
+          <div class="email-wrapper">
+            <label :for="'Email'+index" class="container-checkbox">
+              <span class="text">
+                {{ people.email }}
+              </span>
+              <input type="checkbox" :id="'Email'+index" @change="SelectUser(people)">
+              <span class="checkmark"></span>
+            </label>
+            <div class="arrow">
+              <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 11L6 6L1 1" stroke="#999999" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </td>
+        <td>{{ people.potatoes }}</td>
         <td>{{ people.first_name }}</td>
         <td>{{ people.last_name }}</td>
       </tr>
@@ -52,6 +67,9 @@ export default {
         this.$store.dispatch('SortCompleted', true);
       }
     },
+    SelectUser(people){
+      people.active = people.active !== true;
+    }
   },
   created() {
 

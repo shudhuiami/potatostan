@@ -13,7 +13,9 @@
         </div>
       </div>
       <div class="main-container-inner" v-if="peoples.length > 0">
-        <h4 class="text-right">{{ peoples.length }} people in the list</h4>
+        <div class="header-wrapper">
+          <h4 class="text-right">{{ peoples.length }} people in the list</h4>
+        </div>
         <AppTable/>
       </div>
       <div class="main-container-inner flex-inner" v-if="peoples.length === 0">

@@ -10,7 +10,7 @@
                 This is the default title!
               </slot>
             </header>
-            <section class="modal-body">
+            <section class="modal-body ">
               <slot name="body">
                 This is the default body!
               </slot>
