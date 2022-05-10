@@ -37,6 +37,7 @@ export default {
     },
     resetTraining() {
       this.$store.commit('setTimerReset', true)
+      this.$store.commit('setTimerStatus', false)
       this.$store.commit('setAlertModal', false)
       this.$store.commit('setStartModal', true)
       this.$store.commit('setPeoples', [])
