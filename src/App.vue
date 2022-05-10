@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  <!--Main Container-->
     <div class="main-container-wrapper">
       <div class="section-header">
         <div class="section-title">
@@ -16,15 +17,21 @@
         <div class="header-wrapper">
           <h4 class="text-right">{{ peoples.length }} people in the list</h4>
         </div>
+        <!--Sortable table-->
         <AppTable/>
+        <!--Sortable table-->
       </div>
+      <!--Empty List-->
       <div class="main-container-inner flex-inner" v-if="peoples.length === 0">
         <h2 class="gd-text-2">Peoples list is empty</h2>
       </div>
-
+      <!--Empty List-->
     </div>
+    <!--Start popup-->
     <AppSortModal/>
+    <!--Result popup-->
     <AppResultModal/>
+    <!--Alert popup-->
     <AppAlertModal/>
   </div>
 </template>
@@ -50,10 +57,9 @@ export default {
     timerStatus() {
       return this.$store.getters.getTimerStatus;
     },
-
-
   },
   methods: {
+    //Start training session
     startTraining() {
       if(this.timerStatus === false){
         this.$store.commit('setStartModal', true)
@@ -61,8 +67,6 @@ export default {
         this.$store.commit('setAlertModal', true)
       }
     }
-  },
-  mounted() {
   },
   components: {AppTable, AppSortModal, AppResultModal, AppAlertModal, AppTimer}
 }
